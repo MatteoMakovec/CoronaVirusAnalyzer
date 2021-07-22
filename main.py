@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+
+url = "https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases"
 confirmed = pd.read_csv('externalSources/covid19_confirmed.csv')
 deaths = pd.read_csv('externalSources/covid19_deaths.csv')
 recovered = pd.read_csv('externalSources/covid19_recovered.csv')
@@ -45,7 +47,7 @@ for day in range (1, len(confirmed)):
 
 
 ####        VISUALIZATION        ###
-country = 'Italy'
+countries = ['Italy', 'France', 'United Kingdom', 'US', 'China', 'Germany']
 
 ax = plt.subplot()
 ax.set_facecolor('black')
@@ -54,5 +56,8 @@ ax.tick_params(axis='x', colors='white')
 ax.tick_params(axis='y', colors='white')
 ax.set_title('Covid-19 - Total Cases Growth Rate', color='white')
 
-confirmed[country].plot.bar()
+for country in countries:
+    overall_growth_rate[country].plot(label=country)
+
+plt.legend(loc='upper left')
 plt.show()
